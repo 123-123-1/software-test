@@ -1,0 +1,29 @@
+:root {
+  /* 顶部菜单栏高度 */
+  --top-size: 60px;
+  /* 左侧菜单栏宽度 */
+  --side-size: min(30%, 300px);
+
+  /* 主题颜色的定义 */
+  --gray-bg: #EEEEEE;
+  --lightgray-bg: #FAFAFA;
+  --lightgray-border: #CCCCCC;
+  --menuitem-border: #EEEEEE;
+  --gray-border: #888888;
+  --gray-text: #888888;
+  --lightgray-text: #AAAAAA;
+  --theme-lightblue: #06B1E7;
+  --theme-darkblue: #2A358C;
+  --lightblue-bg-dark: #C2E6FF;
+  --lightblue-bg: #E6F3FC;
+  --lightblue-text: #078BF0;
+  --green-bg: #DDFFEE;
+  --green-text: #43CF7C;
+  --yellow-bg: #FFFFDD;
+  --yellow-text: #FFC300;
+  --red-text: #FF5733;
+  --red-bg: #FFDDDD;
+
+  /* 字体大小的定义 */
+  --title-size: 1.2em;
+}
