@@ -16,9 +16,7 @@ import 'prismjs/components/prism-javascript';
 import 'prismjs/themes/prism-tomorrow.css'; // import syntax highlighting styles
 
 const test = ref('console.log("Hello World")')
-const props = defineProps({
-    code: String
-})
+
 function highlighter(code) {
     return highlight(code, languages.js); // languages.<insert language> to return html with markup
 }

@@ -23,7 +23,7 @@
                 </el-text>
             </div>
         </div>
-        <el-table border :data="data" style="width: 80vw; max-height:70vh; overflow-x: auto;overflow-y: auto;">
+        <el-table  :data="data" style="width: 80vw; max-height:70vh; overflow-x: auto;overflow-y: auto;">
             <el-table-column prop="no" label="用例编号" width=auto />
             <el-table-column prop="a" label="第一条边" width=auto />
             <el-table-column prop="b" label="第二条边" width="auto" />

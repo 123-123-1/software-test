@@ -8,7 +8,7 @@
                 style="justify-content: start;align-content: center;padding-left: 0px; background-color: #efefef;">
                 <el-button @click="collapse" :icon="icon()" color="#71777c80" :round=false
                     class="el-button-collapse"></el-button>
-                <span style="padding-left:20px; font-size:20px">软件测试作业</span>
+                <span style="padding-left:20px; font-size:20px">软件测试</span>
             </el-header>
             <el-main style="margin-top:1px; background-color: #efefef">
                 <RouterView />
