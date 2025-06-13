@@ -7,7 +7,7 @@ import Fee from '../views/fee/fee.vue'
 import Sale from '../views/sale/sale.vue'
 import test from '../views/test.vue'
 import test2 from '../views/test2.vue'
-
+import SystemTest from '../views/systemtest/SystemTest.vue'
 
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,6 +30,11 @@ const router = createRouter({
                     path: '/computer',
                     name: 'computer',
                     component: Computer,
+                },
+                {
+                    path: '/systemtest',
+                    name: 'systemtest',
+                    component: SystemTest,
                 },
                 {
                     path: '/fee',

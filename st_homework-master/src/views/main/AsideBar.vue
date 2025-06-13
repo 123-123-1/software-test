@@ -34,7 +34,7 @@
                 <el-menu-item index="/calendar" style="justify-content:start">
                     2.集成测试
                 </el-menu-item>
-                <el-menu-item index="/computer" style="justify-content:start">
+                <el-menu-item index="/systemtest" style="justify-content:start">
                     3.系统测试
                 </el-menu-item>
             </el-menu-item-group>

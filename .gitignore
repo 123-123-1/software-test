@@ -23,3 +23,5 @@
 hs_err_pid*
 replay_pid*
 sport-management-front-end/package-lock.json
+/.idea
+/sport-management-back-end/.mvn
