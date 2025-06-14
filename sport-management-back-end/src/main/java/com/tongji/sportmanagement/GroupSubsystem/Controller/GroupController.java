@@ -10,6 +10,7 @@ import com.tongji.sportmanagement.GroupSubsystem.Service.GroupService;
 import com.tongji.sportmanagement.Common.DTO.AuditResultDTO;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
