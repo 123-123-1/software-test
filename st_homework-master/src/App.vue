@@ -1,13 +1,11 @@
 <script setup>
 import { RouterView } from 'vue-router'
-
 </script>
 
 <template>
-    <div style="height:100%; width:100vw;">
-        <RouterView />
-    </div>
-
+  <RouterView />
 </template>
 
-<style scoped></style>
+<style scoped>
+/* 移除不必要的样式 */
+</style>
