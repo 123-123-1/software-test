@@ -98,6 +98,7 @@ import { ref, computed } from 'vue'
 import { ElMessage } from 'element-plus'
 
 const testCases = ref([
+    // MessageServiceTest 的测试用例
     {
         name: 'sendMessage_Success',
         method: {
@@ -175,6 +176,397 @@ const testCases = ref([
         pass: undefined,
         duration: '-',
         loading: false
+    },
+    // UserServiceTest 的测试用例
+    {
+        name: 'login_Success',
+        method: {
+            '测试方法': 'login',
+            '参数': 'username="test", password="password"',
+            '测试目标': '验证用户登录成功'
+        },
+        expect: '返回用户信息和登录token',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'login_UserNotFound',
+        method: {
+            '测试方法': 'login',
+            '参数': 'username="nonexistent", password="password"',
+            '测试目标': '验证不存在用户登录失败'
+        },
+        expect: '抛出异常，提示"用户不存在"',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'login_WrongPassword',
+        method: {
+            '测试方法': 'login',
+            '参数': 'username="test", password="wrong"',
+            '测试目标': '验证密码错误登录失败'
+        },
+        expect: '抛出异常，提示"密码错误"',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'register_Success_RegularUser',
+        method: {
+            '测试方法': 'register',
+            '参数': 'userInfo={username:"new", password:"pwd", role:"USER"}',
+            '测试目标': '验证普通用户注册成功'
+        },
+        expect: '返回注册成功信息',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'register_Success_VenueAdmin',
+        method: {
+            '测试方法': 'register',
+            '参数': 'userInfo={username:"admin", password:"pwd", role:"VENUE_ADMIN"}',
+            '测试目标': '验证场馆管理员注册成功'
+        },
+        expect: '返回注册成功信息',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'register_UserAlreadyExists',
+        method: {
+            '测试方法': 'register',
+            '参数': 'userInfo={username:"existing", password:"pwd"}',
+            '测试目标': '验证重复用户名注册失败'
+        },
+        expect: '抛出异常，提示"用户名已存在"',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'isUserAdmin_True',
+        method: {
+            '测试方法': 'isUserAdmin',
+            '参数': 'userId=1',
+            '测试目标': '验证管理员用户身份'
+        },
+        expect: '返回true',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'isUserAdmin_False',
+        method: {
+            '测试方法': 'isUserAdmin',
+            '参数': 'userId=2',
+            '测试目标': '验证非管理员用户身份'
+        },
+        expect: '返回false',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'isUserAdmin_UserNotFound',
+        method: {
+            '测试方法': 'isUserAdmin',
+            '参数': 'userId=999',
+            '测试目标': '验证不存在用户的管理员判断'
+        },
+        expect: '抛出异常，提示"用户不存在"',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'getUserInfo_Success',
+        method: {
+            '测试方法': 'getUserInfo',
+            '参数': 'userId=1',
+            '测试目标': '验证成功获取用户信息'
+        },
+        expect: '返回正确的用户信息',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'getUserInfo_UserNotFound',
+        method: {
+            '测试方法': 'getUserInfo',
+            '参数': 'userId=999',
+            '测试目标': '验证获取不存在用户信息失败'
+        },
+        expect: '抛出异常，提示"用户不存在"',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'getUserProfile_Success',
+        method: {
+            '测试方法': 'getUserProfile',
+            '参数': 'userId=1',
+            '测试目标': '验证成功获取用户档案'
+        },
+        expect: '返回用户的完整档案信息',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'getUserProfile_UserNotFound',
+        method: {
+            '测试方法': 'getUserProfile',
+            '参数': 'userId=999',
+            '测试目标': '验证获取不存在用户档案失败'
+        },
+        expect: '抛出异常，提示"用户不存在"',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'getUserPhoto_Success',
+        method: {
+            '测试方法': 'getUserPhoto',
+            '参数': 'userId=1',
+            '测试目标': '验证成功获取用户头像'
+        },
+        expect: '返回用户头像URL',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'updateUserInfo_Success',
+        method: {
+            '测试方法': 'updateUserInfo',
+            '参数': 'userId=1, userInfo={...}',
+            '测试目标': '验证成功更新用户信息'
+        },
+        expect: '返回更新成功信息',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'updateUserInfo_UserNotFound',
+        method: {
+            '测试方法': 'updateUserInfo',
+            '参数': 'userId=999, userInfo={...}',
+            '测试目标': '验证更新不存在用户信息失败'
+        },
+        expect: '抛出异常，提示"用户不存在"',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'updateUserPwd_Success',
+        method: {
+            '测试方法': 'updateUserPwd',
+            '参数': 'userId=1, oldPwd="old", newPwd="new"',
+            '测试目标': '验证成功修改密码'
+        },
+        expect: '返回密码修改成功信息',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'updateUserPwd_UserNotFound',
+        method: {
+            '测试方法': 'updateUserPwd',
+            '参数': 'userId=999, oldPwd="old", newPwd="new"',
+            '测试目标': '验证修改不存在用户密码失败'
+        },
+        expect: '抛出异常，提示"用户不存在"',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'updateUserPwd_WrongOldPassword',
+        method: {
+            '测试方法': 'updateUserPwd',
+            '参数': 'userId=1, oldPwd="wrong", newPwd="new"',
+            '测试目标': '验证原密码错误修改失败'
+        },
+        expect: '抛出异常，提示"原密码错误"',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'updateUserAvatar_Success',
+        method: {
+            '测试方法': 'updateUserAvatar',
+            '参数': 'userId=1, avatarFile=file',
+            '测试目标': '验证成功更新头像'
+        },
+        expect: '返回头像更新成功信息',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'updateUserAvatar_UploadError',
+        method: {
+            '测试方法': 'updateUserAvatar',
+            '参数': 'userId=1, avatarFile=invalidFile',
+            '测试目标': '验证头像上传失败'
+        },
+        expect: '抛出异常，提示"头像上传失败"',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'getUsersByName_Success',
+        method: {
+            '测试方法': 'getUsersByName',
+            '参数': 'username="test"',
+            '测试目标': '验证成功按用户名搜索'
+        },
+        expect: '返回匹配的用户列表',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'getUsersByName_NoUsersFound',
+        method: {
+            '测试方法': 'getUsersByName',
+            '参数': 'username="nonexistent"',
+            '测试目标': '验证搜索无匹配用户'
+        },
+        expect: '返回空列表',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'getUserList_Success',
+        method: {
+            '测试方法': 'getUserList',
+            '参数': 'page=1, size=10',
+            '测试目标': '验证成功获取用户列表'
+        },
+        expect: '返回分页的用户列表',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'getUserList_EmptyList',
+        method: {
+            '测试方法': 'getUserList',
+            '参数': 'page=999, size=10',
+            '测试目标': '验证获取空页用户列表'
+        },
+        expect: '返回空列表',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'getUserNotification_Success',
+        method: {
+            '测试方法': 'getUserNotification',
+            '参数': 'userId=1',
+            '测试目标': '验证成功获取用户通知'
+        },
+        expect: '返回用户通知列表',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'getUserNotification_EmptyList',
+        method: {
+            '测试方法': 'getUserNotification',
+            '参数': 'userId=2',
+            '测试目标': '验证获取空通知列表'
+        },
+        expect: '返回空通知列表',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'sendUserNotification_Success',
+        method: {
+            '测试方法': 'sendUserNotification',
+            '参数': 'userId=1, notification={...}',
+            '测试目标': '验证成功发送用户通知'
+        },
+        expect: '返回发送成功信息',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'editUserNotification_Success',
+        method: {
+            '测试方法': 'editUserNotification',
+            '参数': 'notificationId=1, content="updated"',
+            '测试目标': '验证成功编辑通知'
+        },
+        expect: '返回编辑成功信息',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
+    },
+    {
+        name: 'editUserNotification_NotFound',
+        method: {
+            '测试方法': 'editUserNotification',
+            '参数': 'notificationId=999, content="updated"',
+            '测试目标': '验证编辑不存在通知失败'
+        },
+        expect: '抛出异常，提示"通知不存在"',
+        actual: '-',
+        pass: undefined,
+        duration: '-',
+        loading: false
     }
 ])
 
@@ -226,14 +618,22 @@ async function runAllTests() {
             body: JSON.stringify(testCases.value.map(({loading, ...rest}) => rest))
         })
         const data = await res.json()
-        if (data.success) {
-            // 更新每个用例的结果
-            data.results.forEach((r, i) => {
-                Object.assign(testCases.value[i], r)
+        if (Array.isArray(data)) {
+            // 处理所有测试类的结果
+            data.forEach(classResult => {
+                classResult.testResults.forEach(result => {
+                    // 找到对应的测试用例并更新结果
+                    const testCase = testCases.value.find(tc => tc.name === result.methodName)
+                    if (testCase) {
+                        testCase.actual = `${result.status}\n测试类: ${classResult.className}`
+                        testCase.pass = result.status === 'PASSED'
+                        testCase.duration = `${result.executionTime}ms`
+                    }
+                })
             })
             status.value = 'done'
         } else {
-            ElMessage.error('单元测试接口返回失败')
+            ElMessage.error('单元测试接口返回格式不正确')
             status.value = 'init'
         }
     } catch (e) {
@@ -258,10 +658,17 @@ async function runSingleTest(index) {
             body: JSON.stringify([{...tc, loading: undefined}])
         })
         const data = await res.json()
-        if (data.success && data.results.length > 0) {
-            Object.assign(tc, data.results[0])
+        if (Array.isArray(data) && data.length > 0) {
+            // 处理测试类的结果
+            const classResult = data[0]
+            const result = classResult.testResults.find(r => r.methodName === tc.name)
+            if (result) {
+                tc.actual = `${result.status}\n测试类: ${classResult.className}`
+                tc.pass = result.status === 'PASSED'
+                tc.duration = `${result.executionTime}ms`
+            }
         } else {
-            ElMessage.error('单元测试接口返回失败')
+            ElMessage.error('单元测试接口返回格式不正确')
         }
     } catch (e) {
         ElMessage.error('单元测试接口调用失败: ' + e)

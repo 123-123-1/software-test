@@ -34,11 +34,10 @@
         </el-table>
     </div>
 </template>
-
 <script setup>
 import { ref, reactive } from 'vue'
 import testCases from '@/assets/json/triangle.json'
-import triangle from '@/assets/funcs/triangle';
+import triangle_wrong from '@/assets/funcs/triangle_wrong';
 const caseName = ["健壮边界分析", "弱一般等价类", "弱健壮等价类"]
 const value = ref("0")
 const options = ref([
@@ -52,7 +51,6 @@ const casePassed = ref(0)
 var data = reactive(testCases[caseName[value.value]])
 function updateData() {
     reset()
-    // console.log(value.value)
     data = reactive(testCases[caseName[value.value]])
 }
 
@@ -60,7 +58,7 @@ function startTest() {
     reset()
     for (let i in data) {
         caseNum.value++
-        data[i].actual = triangle(data[i].a, data[i].b, data[i].c)
+        data[i].actual = triangle_wrong(data[i].a, data[i].b, data[i].c)
         data[i].result = (data[i].actual == data[i].expected) ? "通过" : "未通过"
         if (data[i].result == "通过") {
             casePassed.value++;
@@ -78,7 +76,6 @@ function reset() {
 }
 
 </script>
-
 <style>
 .el-table .warning-row {
     --el-table-tr-bg-color: var(--el-color-warning-light-9);
@@ -87,4 +84,4 @@ function reset() {
 .el-table .success-row {
     --el-table-tr-bg-color: var(--el-color-success-light-9);
 }
-</style>
+</style> 
