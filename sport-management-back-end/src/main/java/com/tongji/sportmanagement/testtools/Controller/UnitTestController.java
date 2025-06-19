@@ -1,9 +1,10 @@
-package com.tongji.sportmanagement.TestTools.Controller;
+package com.tongji.sportmanagement.testtools.Controller;
 
-import com.tongji.sportmanagement.Common.DTO.ResultMsg;
-import com.tongji.sportmanagement.TestTools.Service.UnitTestService;
+import com.tongji.sportmanagement.testtools.Service.UnitTestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
@@ -16,12 +17,7 @@ public class UnitTestController {
     private UnitTestService unitTestService;
 
     @PostMapping("/run")
-    public ResultMsg runTests(@RequestBody List<Map<String, Object>> testCases) {
-        try {
-            List<Map<String, Object>> results = unitTestService.runTests(testCases);
-            return new ResultMsg(1, "测试完成", results);
-        } catch (Exception e) {
-            return new ResultMsg(0, "测试失败: " + e.getMessage(), null);
-        }
+    public List<Map<String, Object>> runAllTests() {
+        return unitTestService.runAllTests();
     }
 } 
