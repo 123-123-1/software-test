@@ -7,6 +7,7 @@ import Fee from '../views/fee/fee.vue'
 import Sale from '../views/sale/sale.vue'
 import test from '../views/test.vue'
 import SystemTest from '../views/systemtest/SystemTest.vue'
+import IntegrationTest from '../views/integrationtest/IntegrationTest.vue'
 
 const routes = [
     {
@@ -27,6 +28,11 @@ const routes = [
                 path: '/computer',
                 name: 'computer',
                 component: Computer,
+            },
+            {
+                path: '/integrationtest',
+                name: 'integrationtest',
+                component: IntegrationTest,
             },
             {
                 path: '/systemtest',

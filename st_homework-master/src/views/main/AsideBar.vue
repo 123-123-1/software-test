@@ -1,5 +1,5 @@
 <template>
-    <el-menu class="el-menu-vertical-demo" :collapse="isCollapse" router background-color="#343c44" text-color="#ffffff"
+    <el-menu class="el-menu-vertical-demo" :collapse="isCollapse" router background-color="#84bdf9" text-color="#00000"
         active-text-color="#ffd700" :default-openeds="openeds">
         <el-sub-menu index="1">
             <template v-slot:title>
@@ -35,11 +35,8 @@
                 <el-menu-item index="/unittest" style="justify-content:start">
                     1.单元测试
                 </el-menu-item>
-                <el-menu-item index="/calendar" style="justify-content:start">
+                <el-menu-item index="/integrationtest" style="justify-content:start">
                     2.集成测试
-                </el-menu-item>
-                <el-menu-item index="/systemtest" style="justify-content:start">
-                    3.系统测试
                 </el-menu-item>
             </el-menu-item-group>
         </el-sub-menu>

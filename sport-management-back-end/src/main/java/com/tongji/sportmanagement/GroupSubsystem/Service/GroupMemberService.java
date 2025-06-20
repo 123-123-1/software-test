@@ -40,7 +40,7 @@ public class GroupMemberService {
 
     @Transactional
     public ResultMsg quitGroup(Integer groupId,Integer memberId) {
-        if(!groupMemberRepository.existsByUserId(memberId)) {
+        if(groupMemberRepository.existsByUserId(memberId)) {
             throw new IllegalArgumentException("该用户没有加入团体");
         }
         groupApplicationRepository.deleteByUserId(memberId);

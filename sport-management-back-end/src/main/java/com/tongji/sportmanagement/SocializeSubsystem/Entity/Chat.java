@@ -34,5 +34,4 @@ public class Chat {
 
     @Column(name = "photo", length = 100)
     private String photo;
-
 }
