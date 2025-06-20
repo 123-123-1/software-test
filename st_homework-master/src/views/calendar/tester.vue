@@ -38,13 +38,12 @@
 import { ref, reactive } from 'vue'
 import testCases from '@/assets/json/calendar.json'
 import calendar from '@/assets/funcs/calendar.js';
-const caseName = ["健壮边界分析", "强一般等价类", "弱健壮等价类", "决策表分析"]
+const caseName = ["边界值分析", "等价类分析", "决策表分析"]
 const value = ref("0")
 const options = ref([
-    { value: "0", label: "健壮边界分析" },
-    { value: "1", label: "强一般等价类" },
-    { value: "2", label: "弱健壮等价类" },
-    { value: "3", label: "决策表分析" }
+    { value: "0", label: "边界值分析" },
+    { value: "1", label: "等价类分析" },
+    { value: "2", label: "决策表分析" },
 ])
 const caseNum = ref(0)
 const casePassed = ref(0)
