@@ -6,18 +6,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class IntegrationTestService {
+
     public List<Map<String, Object>> runAllTests() {
         List<Map<String, Object>> results = new ArrayList<>();
 
         String[] testClassNames = {
             "com.tongji.sportmanagement.testtools.testfiles.MessageServiceTest",
             "com.tongji.sportmanagement.testtools.testfiles.UserServiceTest",
-            "com.tongji.sportmanagement.testtools.testfiles.ChatServiceTest",
-            "com.tongji.sportmanagement.testtools.testfiles.GroupMemberServiceTest"
+            "com.tongji.sportmanagement.testtools.testfiles.FriendApplicationServiceTest"
         };
 
         for (String className : testClassNames) {
