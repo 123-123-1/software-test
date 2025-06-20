@@ -148,7 +148,7 @@ public class GroupApplicationService {
             }
             else if (application.getType().equals(GroupApplicationType.invited)) {
                 groupMemberService.addMember(application.getGroupId(), application.getReviewerId());
-                chatService.inviteIntoGroupChat(application.getReviewerId(),group.getChatId());
+                chatService.inviteIntoGroupChat(group.getChatId(),application.getReviewerId());
                 groupRecordService.addRecord(application.getReviewerId(), null, group.getGroupId(),"受邀加入团体");
             }
         } else {

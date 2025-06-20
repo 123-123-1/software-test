@@ -98,7 +98,7 @@ export const auditGroupApplication = (targetId, auditResult) => {
     auditObjectId: targetId,
     result: auditResult,
   };
-  httpInstance.post('/api/groups/application', auditData).then((res) => {
+  httpInstance.patch('/api/groups/application', auditData).then((res) => {
     ElMessage.success('已审核申请');
     getGroupApplications();
   }).catch((err) => {
@@ -156,12 +156,12 @@ export const changeMemberRole = (memberId, role) => {
   });
 };
 
-export const inviteJoinGroup = (groupId, targetId, successHandler, errHandler) => {
+export const inviteJoinGroup = (targetId, successHandler, errHandler) => {
   const inviteData = {
-    groupId: groupId,
+    groupId: groupInfo.value.groupId,
     inviteeId: targetId,
   };
-  httpInstance.post('/api/groups/application/by').then((res) => {
+  httpInstance.post('/api/groups/application/by',inviteData).then((res) => {
     ElMessage.success('已向该用户发送申请');
   }).catch((err) => {
     console.log(err);
