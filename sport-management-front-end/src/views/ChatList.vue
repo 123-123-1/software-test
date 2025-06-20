@@ -171,7 +171,9 @@ onMounted(async () => {
 }
 
 .messageArea{
-  flex: 1;
+  flex: 1; 
+  height: 400px; 
+  overflow-y: auto;
 }
 
 .sendArea{

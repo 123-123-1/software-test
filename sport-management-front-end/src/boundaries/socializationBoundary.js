@@ -77,6 +77,7 @@ export const postChatMessage = () => {
   httpInstance.post('/api/socialize/messages', messageData).then((res) => {
     ElMessage.success("已发送消息");
     getChatMessage();
+    messageInput.value = null;
   }).catch((err) => {
     console.log(err);
   });
