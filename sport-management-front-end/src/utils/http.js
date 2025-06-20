@@ -3,7 +3,7 @@ import useUserStore from '@/stores/userStore';
 
 const httpInstance = axios.create({
   // baseURL: 'http://47.116.222.84:8080',
-  baseURL: '/backend',
+  baseURL: 'http://113.44.64.65:8080',
   timeout: 5000, // 超时时间
 });
 
