@@ -36,7 +36,7 @@ onMounted(() => {
             <el-button type="primary" size="small" v-if="scope.row.state === 'waiting'"
             @click="auditFriendApplication(scope.row.friendApplicationId, true)">同意</el-button>
             <el-button type="danger" size="small" v-if="scope.row.state === 'waiting'"
-            @click="auditFriendApplication(scope.row.friendApplicationId, true)">拒绝</el-button>
+            @click="auditFriendApplication(scope.row.friendApplicationId, false)">拒绝</el-button>
           </div>
           <div v-else class="applicationStateDisplay" :data-state="scope.row.state">
             {{ applicationStateEnum[scope.row.state] }}

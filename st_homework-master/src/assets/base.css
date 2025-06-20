@@ -1,86 +1,88 @@
-/* color palette from <https://github.com/vuejs/theme> */
+/* Modern Blue-Grey Theme */
 :root {
-  --vt-c-white: #ffffff;
-  --vt-c-white-soft: #f8f8f8;
-  --vt-c-white-mute: #f2f2f2;
-
-  --vt-c-black: #181818;
-  --vt-c-black-soft: #222222;
-  --vt-c-black-mute: #282828;
-
-  --vt-c-indigo: #2c3e50;
-
-  --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
-  --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
-  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
-  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
-
-  --vt-c-text-light-1: var(--vt-c-indigo);
-  --vt-c-text-light-2: rgba(60, 60, 60, 0.66);
-  --vt-c-text-dark-1: var(--vt-c-white);
-  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
-}
-
-/* semantic color variables for this project */
-:root {
-  --color-background: var(--vt-c-white);
-  --color-background-soft: var(--vt-c-white-soft);
-  --color-background-mute: var(--vt-c-white-mute);
-
-  --color-border: var(--vt-c-divider-light-2);
-  --color-border-hover: var(--vt-c-divider-light-1);
-
-  --color-heading: var(--vt-c-text-light-1);
-  --color-text: var(--vt-c-text-light-1);
-
-  --section-gap: 160px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: var(--vt-c-black);
-    --color-background-soft: var(--vt-c-black-soft);
-    --color-background-mute: var(--vt-c-black-mute);
-
-    --color-border: var(--vt-c-divider-dark-2);
-    --color-border-hover: var(--vt-c-divider-dark-1);
-
-    --color-heading: var(--vt-c-text-dark-1);
-    --color-text: var(--vt-c-text-dark-2);
-  }
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  font-weight: normal;
+  --main-blue: #3a8ee6;
+  --main-blue-light: #e6f2fb;
+  --main-grey: #f5f7fa;
+  --main-grey-dark: #d3dae6;
+  --main-white: #ffffff;
+  --main-black: #222831;
+  --main-shadow: 0 4px 24px 0 rgba(58,142,230,0.08);
+  --main-radius: 16px;
+  --main-radius-sm: 8px;
+  --main-text: #222831;
+  --main-text-light: #3a8ee6;
 }
 
 body {
   min-height: 100vh;
-  color: var(--color-text);
-  background: var(--color-background);
-  transition:
-    color 0.5s,
-    background-color 0.5s;
-  line-height: 1.6;
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    'Fira Sans',
-    'Droid Sans',
-    'Helvetica Neue',
-    sans-serif;
-  font-size: 15px;
-  text-rendering: optimizeLegibility;
+  color: var(--main-text);
+  background: var(--main-grey);
+  font-family: 'PingFang SC', 'HarmonyOS Sans', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background 0.4s, color 0.4s;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--main-blue);
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+a:hover {
+  color: #005bbd;
+}
+
+.card {
+  background: var(--main-white);
+  border-radius: var(--main-radius);
+  box-shadow: var(--main-shadow);
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+input, textarea, select {
+  border-radius: var(--main-radius-sm);
+  border: 1px solid var(--main-grey-dark);
+  padding: 8px 12px;
+  background: var(--main-grey);
+  transition: border 0.2s, box-shadow 0.2s;
+}
+input:focus, textarea:focus, select:focus {
+  border: 1.5px solid var(--main-blue);
+  outline: none;
+  box-shadow: 0 0 0 2px #e6f2fb;
+}
+
+button, .el-button {
+  border-radius: var(--main-radius-sm) !important;
+  background: var(--main-blue) !important;
+  color: #fff !important;
+  box-shadow: var(--main-shadow);
+  border: none;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+button:hover, .el-button:hover {
+  background: #005bbd !important;
+}
+
+.el-table, table {
+  border-radius: var(--main-radius);
+  overflow: hidden;
+  box-shadow: var(--main-shadow);
+  background: var(--main-white);
+}
+.el-table th, .el-table td, table th, table td {
+  padding: 12px 8px;
+}
+.el-table tr:nth-child(even), table tr:nth-child(even) {
+  background: var(--main-grey);
+}
+.el-table tr:hover, table tr:hover {
+  background: #e6f2fb;
 }
