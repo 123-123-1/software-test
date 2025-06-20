@@ -612,7 +612,7 @@ async function runAllTests() {
         tc.loading = false
     })
     try {
-        const res = await fetch('http://localhost:8080/api/testtools/unit/run', {
+        const res = await fetch('http://113.44.64.65:8080/api/testtools/unit/run', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(testCases.value.map(({loading, ...rest}) => rest))
@@ -652,7 +652,7 @@ async function runSingleTest(index) {
     tc.pass = undefined
     tc.duration = '-'
     try {
-        const res = await fetch('http://localhost:8080/api/testtools/unit/run', {
+        const res = await fetch('http://113.44.64.65:8080/api/testtools/unit/run', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify([{...tc, loading: undefined}])

@@ -378,7 +378,7 @@ async function runAllTests() {
     // 只请求后端处理剩余用例
     try {
         const restCases = testCases.value.slice(2).map(({loading, ...rest}) => rest)
-        const res = await fetch('http://localhost:8080/api/testtools/integration/run', {
+        const res = await fetch('http://113.44.64.65:8080/api/testtools/integration/run', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(restCases)
@@ -437,7 +437,7 @@ async function runSingleTest(index) {
         return
     }
     try {
-        const res = await fetch('http://localhost:8080/api/testtools/integration/run', {
+        const res = await fetch('http://113.44.64.65:8080/api/testtools/integration/run', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify([{...tc, loading: undefined}])
