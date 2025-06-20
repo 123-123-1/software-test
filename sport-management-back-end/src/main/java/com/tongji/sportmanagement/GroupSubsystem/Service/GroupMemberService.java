@@ -102,3 +102,72 @@ public class GroupMemberService {
         return ResultMsg.success("已成功设置用户权限");
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+package com.tongji.sportmanagement.GroupSubsystem.Service;
+
+import com.tongji.sportmanagement.AccountSubsystem.Service.UserService;
+import com.tongji.sportmanagement.Common.DTO.ResultMsg;
+import com.tongji.sportmanagement.GroupSubsystem.DTO.GroupMemberDetailDTO;
+import com.tongji.sportmanagement.GroupSubsystem.DTO.RoleDTO;
+import com.tongji.sportmanagement.GroupSubsystem.Entity.*;
+import com.tongji.sportmanagement.GroupSubsystem.Repository.GroupApplicationRepository;
+import com.tongji.sportmanagement.GroupSubsystem.Repository.GroupMemberRepository;
+import com.tongji.sportmanagement.GroupSubsystem.Repository.GroupRecordRepository;
+import com.tongji.sportmanagement.GroupSubsystem.Repository.GroupRepository;
+import com.tongji.sportmanagement.SocializeSubsystem.Service.ChatService;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@Service
+public class GroupMemberService {
+
+    private final GroupMemberRepository groupMemberRepository;
+    private final GroupRecordRepository groupRecordRepository;
+    private final GroupRepository groupRepository;
+    private final GroupRecordService groupRecordService;
+    private final GroupApplicationRepository groupApplicationRepository;
+    private final ChatService chatService;
+    private final UserService userService;
+
+    public GroupMemberService(GroupMemberRepository groupMemberRepository, GroupRecordRepository groupRecordRepository, GroupRepository groupRepository, GroupRecordService groupRecordService, GroupApplicationRepository groupApplicationRepository, UserService userService, ChatService chatService) {
+        this.groupMemberRepository = groupMemberRepository;
+        this.groupRecordRepository = groupRecordRepository;
+        this.groupRepository = groupRepository;
+        this.groupRecordService = groupRecordService;
+        this.groupApplicationRepository = groupApplicationRepository;
+        this.userService = userService;
+        this.chatService = chatService;
+    }
+
+
+    @Transactional
+    public ResultMsg quitGroup(Integer groupId,Integer memberId) {
+        if(!groupMemberRepository.existsByUserId(memberId)) {
+            throw new IllegalArgumentException("该用户没有加入团体");
+        }
+        groupApplicationRepository.deleteByUserId(memberId);
+        groupMemberRepository.deleteByGroupIdAndUserId(groupId,memberId);
+        groupRecordRepository.deleteByGroupIdAndOperatorId(groupId,memberId);
+        var group=groupRepository.findById(groupId).orElseThrow();
+        chatService.quitGroupChat(group.getChatId(), memberId);
+        if(groupMemberRepository.countByGroupId(groupId)==0){
+            groupRepository.deleteById(groupId);
+        }
+        return ResultMsg.success("退出团体成功");
+    }
+}

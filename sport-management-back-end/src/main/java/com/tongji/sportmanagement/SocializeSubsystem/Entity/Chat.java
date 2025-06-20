@@ -2,17 +2,24 @@ package com.tongji.sportmanagement.SocializeSubsystem.Entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
+import lombok.*;
 
 import java.time.Instant;
 
+
+@Data
 @Getter
 @Setter
 @Entity
 @Table(name = "chat")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
