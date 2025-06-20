@@ -1,19 +1,21 @@
 <template>
-    <el-container class="main-container">
-        <el-aside :width="isCollapse ? '64px' : '200px'" class="aside-container">
-            <AsideBar :isCollapse="isCollapse" />
-        </el-aside>
-        <el-container class="content-container">
-            <el-header class="header-container">
-                <el-button @click="collapse" :icon="icon()" color="#71777c80" :round=false
-                    class="el-button-collapse"></el-button>
-                <span style="padding-left:20px; font-size:20px">软件测试</span>
-            </el-header>
-            <el-main class="main-content">
-                <RouterView />
-            </el-main>
+    <div class="main-bg">
+        <el-container class="main-container">
+            <el-container class="content-container">
+                <el-header class="header-container">
+                    <span class="header-title">软件测试</span>
+                </el-header>
+                <el-main class="main-content">
+                    <div class="card main-card">
+                        <RouterView />
+                    </div>
+                </el-main>
+            </el-container>
+            <el-aside width="220px" class="aside-container">
+                <AsideBar class="right-aside" />
+            </el-aside>
         </el-container>
-    </el-container>
+    </div>
 </template>
 
 <script lang="ts" setup>
@@ -32,66 +34,70 @@ const isCollapse = ref(false)
 </script>
 
 <style scoped>
+.main-bg {
+    background: linear-gradient(120deg, #e6f2fb 0%, #f5f7fa 100%);
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
 .main-container {
-    height: 100vh;
-    width: 100vw;
-    position: fixed;
-    top: 0;
-    left: 0;
+    height: 100%;
+    width: 100%;
+    background: transparent;
+    display: flex;
+    flex-direction: row;
     overflow: hidden;
+    box-sizing: border-box;
 }
-
-.aside-container {
-    height: 100vh;
-    background-color: #545c64;
-    transition: width 0.3s;
-    overflow: hidden;
-}
-
 .content-container {
-    height: 100vh;
     flex: 1;
     display: flex;
     flex-direction: column;
-    background-color: #f0f2f5;
+    background: transparent;
+    min-width: 0;
 }
-
 .header-container {
-    height: 60px;
+    width: 100%;
+    height: 5%;
     display: flex;
     align-items: center;
-    padding: 0;
-    background-color: #ffffff;
-    border-bottom: 1px solid #e6e6e6;
+    background: linear-gradient(90deg, #3a8ee6 0%, #6fb3fa 100%);
+    box-shadow: 0 2px 12px 0 rgba(58,142,230,0.08);
+    border-radius: 0 0 18px 18px;
+    padding: 0 32px;
 }
-
+.header-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 2px;
+}
 .main-content {
+    height: 70%;
+    width: 100%;
     flex: 1;
     overflow-y: auto;
-    padding: 20px;
-    background-color: #ffffff;
-    margin: 10px;
-    border-radius: 4px;
+    background: transparent;
 }
-
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 100%;
+.main-card {
+    height: 110%;
+    margin: 0 auto;
+    max-width: 1300px;
 }
-
-.el-button-collapse {
-    width: 60px;
-    height: 100%;
-    border: none;
-    border-radius: 0;
-    margin: 0;
+.aside-container {
+    width: 220px !important;
+    min-width: 220px;
+    max-width: 220px;
+    height: 100vh;
+    background: linear-gradient(120deg, #84bdf9 0%, #6fb3fa 100%);
+    box-shadow: -2px 0 16px 0 rgba(58,142,230,0.06);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 32px;
+    overflow-y: auto;
 }
-
-:deep(.el-aside) {
-    overflow: hidden;
-}
-
-:deep(.el-main) {
-    padding: 10px;
+.right-aside {
+    width: 100%;
 }
 </style>
