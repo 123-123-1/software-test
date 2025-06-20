@@ -5,41 +5,38 @@
  * @param {number} equip 外设, 价格45, 月售上限90, 下限为1
  * @return {object}
  */
-const bound = [[0, 70], [0, 80], [0, 90]]
-const value = [25, 30, 45]
-function computerSale(frame, screen, equip) {
-    let tot = 0, cms = 0
-    if (frame === -1 && typeof screen === 'number' && typeof equip === "number") {
-        return [0, 0, "正确"]
+const UNIT_PRICE = { host: 25, monitor: 30, peripheral: 45 }
+const MAX = { host: 70, monitor: 80, peripheral: 90 }
+
+export function calcSale(host, monitor, peripheral) {
+    // 输入为-1时，表示统计
+    if (host === -1) {
+        return { type: 'stat', msg: '请输入本月销售数据后再统计' }
     }
-    for (let pos in arguments) {
-        if (typeof arguments[pos] !== "number") {
-            return [tot, cms, "参数非法"]
-        }
-        if (arguments[pos] < bound[pos][0] || arguments[pos] > bound[pos][1]) {
-            return [tot, cms, "参数非法"]
-        }
-        if (arguments[pos] % 1 !== 0) {
-            return [tot, cms, "参数非法"]
-        }
+    // 校验
+    if (host < 1 || host > MAX.host) {
+        return { type: 'error', msg: `主机数量必须在1~${MAX.host}之间` }
     }
-    for (let pos in arguments) {
-        if (arguments[pos] == 0) {
-            return [tot, cms, "参数非法"]
-        }
+    if (monitor < 1 || monitor > MAX.monitor) {
+        return { type: 'error', msg: `显示器数量必须在1~${MAX.monitor}之间` }
     }
-    for (let pos in arguments) {
-        tot += value[pos] * arguments[pos]
+    if (peripheral < 1 || peripheral > MAX.peripheral) {
+        return { type: 'error', msg: `外设数量必须在1~${MAX.peripheral}之间` }
     }
-    if (tot <= 1000) {
-        cms = tot * 10 / 100;
+    // 计算销售额
+    const total = host * UNIT_PRICE.host + monitor * UNIT_PRICE.monitor + peripheral * UNIT_PRICE.peripheral
+    // 计算佣金
+    let rate = 0.1
+    if (total > 1800) rate = 0.2
+    else if (total > 1000) rate = 0.15
+    const commission = total * rate
+    return {
+        type: 'success',
+        total,
+        commission,
+        rate,
+        msg: `销售额：${total} 元，佣金率：${(rate * 100).toFixed(0)}%，佣金：${commission.toFixed(2)} 元`
     }
-    else if (tot <= 1800) {
-        cms = tot * 15 / 100;
-    }
-    else {
-        cms = tot * 20 / 100;
-    }
-    return [tot, cms, "正确"]
 }
-export default computerSale
+
+export default calcSale

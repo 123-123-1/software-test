@@ -38,34 +38,70 @@
 </template>
 <script setup>
 import { ref, reactive } from 'vue'
-import testCases from '@/assets/json/sale.json'
 import sale from '@/assets/funcs/sale.js';
-const caseName = ["语句覆盖", "判断覆盖", "条件覆盖", "条件判断覆盖", "条件组合覆盖"]
+import { Upload } from '@element-plus/icons-vue'
+const caseName = ["语句覆盖", "判断覆盖", "条件覆盖", "判断-条件覆盖", "条件组合覆盖"]
 const value = ref("0")
 const options = ref([
     { value: "0", label: "语句覆盖" },
     { value: "1", label: "判断覆盖" },
     { value: "2", label: "条件覆盖" },
-    { value: "3", label: "条件判断覆盖" },
+    { value: "3", label: "判断-条件覆盖" },
     { value: "4", label: "条件组合覆盖" },
 ])
 const caseNum = ref(0)
 const casePassed = ref(0)
 
-var data = reactive(testCases[caseName[value.value]])
+const testCases = {
+    "语句覆盖": [
+        { no: 1, s: 2100000, d: 5, r: 70, ecom: (2100000/7).toFixed(2), emsg: "正确" }, // 主路径
+        { no: 2, s: 2100000, d: 5, r: 50, ecom: 0, emsg: "正确" }, // 现金到账<60%
+        { no: 3, s: 1000000, d: 20, r: 80, ecom: (1000000/6).toFixed(2), emsg: "正确" }, // 其他情况，到账<=85%
+        { no: 4, s: 1000000, d: 20, r: 90, ecom: (1000000/5).toFixed(2), emsg: "正确" }, // 其他情况，到账>85%
+    ],
+    "判断覆盖": [
+        { no: 1, s: 2100000, d: 5, r: 70, ecom: (2100000/7).toFixed(2), emsg: "正确" }, // if1 true, if2 false
+        { no: 2, s: 2100000, d: 5, r: 50, ecom: 0, emsg: "正确" }, // if1 true, if2 true
+        { no: 3, s: 1000000, d: 20, r: 80, ecom: (1000000/6).toFixed(2), emsg: "正确" }, // if1 false, if3 true
+        { no: 4, s: 1000000, d: 20, r: 90, ecom: (1000000/5).toFixed(2), emsg: "正确" }, // if1 false, if3 false
+    ],
+    "条件覆盖": [
+        { no: 1, s: 2100000, d: 5, r: 70, ecom: (2100000/7).toFixed(2), emsg: "正确" }, // sale>2e6 true
+        { no: 2, s: 1900000, d: 5, r: 70, ecom: (1900000/6).toFixed(2), emsg: "正确" }, // sale>2e6 false
+        { no: 3, s: 2100000, d: 15, r: 70, ecom: (2100000/6).toFixed(2), emsg: "正确" }, // day<=10 false
+        { no: 4, s: 2100000, d: 5, r: 50, ecom: 0, emsg: "正确" }, // rate<60 true
+        { no: 5, s: 2100000, d: 5, r: 70, ecom: (2100000/7).toFixed(2), emsg: "正确" }, // rate<60 false
+        { no: 6, s: 1000000, d: 20, r: 80, ecom: (1000000/6).toFixed(2), emsg: "正确" }, // rate<=85 true
+        { no: 7, s: 1000000, d: 20, r: 90, ecom: (1000000/5).toFixed(2), emsg: "正确" }, // rate<=85 false
+    ],
+    "判断-条件覆盖": [
+        { no: 1, s: 2100000, d: 5, r: 50, ecom: 0, emsg: "正确" }, // if1 true, if2 true
+        { no: 2, s: 2100000, d: 5, r: 70, ecom: (2100000/7).toFixed(2), emsg: "正确" }, // if1 true, if2 false
+        { no: 3, s: 2100000, d: 15, r: 70, ecom: (2100000/6).toFixed(2), emsg: "正确" }, // if1 false, if3 true
+        { no: 4, s: 2100000, d: 15, r: 90, ecom: (2100000/5).toFixed(2), emsg: "正确" }, // if1 false, if3 false
+    ],
+    "条件组合覆盖": [
+        { no: 1, s: 2100000, d: 5, r: 70, ecom: (2100000/7).toFixed(2), emsg: "正确" }, // T T T
+        { no: 2, s: 2100000, d: 5, r: 50, ecom: 0, emsg: "正确" }, // T T F
+        { no: 3, s: 2100000, d: 15, r: 70, ecom: (2100000/6).toFixed(2), emsg: "正确" }, // T F T
+        { no: 4, s: 2100000, d: 15, r: 50, ecom: (2100000/6).toFixed(2), emsg: "正确" }, // T F F
+        { no: 5, s: 1900000, d: 5, r: 90, ecom: (1900000/5).toFixed(2), emsg: "正确" }, // F T T
+        { no: 6, s: 1900000, d: 5, r: 80, ecom: (1900000/6).toFixed(2), emsg: "正确" }, // F T F
+        { no: 7, s: 1900000, d: 15, r: 90, ecom: (1900000/5).toFixed(2), emsg: "正确" }, // F F T
+        { no: 8, s: 1900000, d: 15, r: 80, ecom: (1900000/6).toFixed(2), emsg: "正确" }, // F F F
+    ],
+}
+
+let data = reactive(testCases[caseName[value.value]])
 function updateData() {
     reset()
-    // console.log(value.value)
     data = reactive(testCases[caseName[value.value]])
 }
 
 function startTest() {
     reset()
-    console.log(data)
     for (let i in data) {
         caseNum.value++
-        // data[i].actual = calendar(parseInt(data[i].y), parseInt(data[i].m), parseInt(data[i].d))
-        // data[i].result = (data[i].actual == data[i].expected) ? "通过" :"未通过"
         let ret = sale(data[i].s, data[i].d, data[i].r)
         data[i].acom = ret[0]
         data[i].amsg = ret[1]
@@ -80,8 +116,7 @@ function reset() {
     caseNum.value = 0
     casePassed.value = 0
     for (let i in data) {
-        data[i].atot = ""
-        data[i].acms = ""
+        data[i].acom = ""
         data[i].amsg = ""
         data[i].result = ""
     }

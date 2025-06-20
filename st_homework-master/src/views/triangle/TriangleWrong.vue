@@ -5,18 +5,17 @@
                 <Desc style="min-height:calc(100vh-202px); " />
             </el-tab-pane>
             <el-tab-pane label="test" name="2">
-                <tester />
+                <tester_wrong />
             </el-tab-pane>
         </el-tabs>
     </el-card>
 </template>
 <script setup>
 import { ref } from 'vue'
-import Desc from './description.vue'
-// import test2 from '../test2.vue'
-import tester from './tester.vue'
+import Desc from './descriptionWrong.vue'
+import tester_wrong from './tester_wrong.vue'
 const activeName = ref("1")
 </script>
 
 <style scoped>
-</style>
+</style> 
