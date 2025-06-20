@@ -141,7 +141,7 @@ public class ReservationService
   }
 
   // 发送请求向场地管理方确认预约
-  private String reservationConfirmManager(Integer venueId, Reservation reservationData, List<ReservationUserDTO> reservationUsers) throws Exception
+  public String reservationConfirmManager(Integer venueId, Reservation reservationData, List<ReservationUserDTO> reservationUsers) throws Exception
   {
     String reservationRequest = apiConfigService.generateReservationData(venueId, reservationData, reservationUsers);
     String reservationUrl = apiConfigService.getVenueUrl(venueId, ApiType.reservation);
@@ -171,7 +171,7 @@ public class ReservationService
 
 
   // 发送请求向场地管理方申请占用
-  private void occupyManagerConfirm(Integer availabilityId) throws Exception
+  public void occupyManagerConfirm(Integer availabilityId) throws Exception
   {
     CourtAvailability courtAvailability = timeslotService.getAvailabilityFullInfo(availabilityId);
     Integer venueId = courtAvailability.getTimeslot().getVenueId();
@@ -276,7 +276,7 @@ public class ReservationService
   }
 
   // 获取预约用户的详细信息
-  private void getReservationUserInfo(List<ReservationUserDTO> users) throws Exception
+  public void getReservationUserInfo(List<ReservationUserDTO> users) throws Exception
   {
     for (int i = 0; i < users.size(); i++) {
       UserInfoDetailDTO userInfo = userService.getUserInfo(users.get(i).getUserId());
