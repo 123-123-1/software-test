@@ -15,7 +15,4 @@ public class ResultMsg {
     static public ResultMsg error(String msg) {
         return new ResultMsg(msg,0);
     }
-    public boolean isSuccess() {
-        return state == 1;
-    }
 }
