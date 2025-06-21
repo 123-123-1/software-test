@@ -27,23 +27,15 @@ public class OssService
   @PostConstruct
   public void init(){
     try{
-      // 从oss-key.txt中读取配置信息
-      File ossKeyFile = new File("./src/main/resources/oss-key.txt");
-      Scanner sc = new Scanner(ossKeyFile);
-      String endpoint = sc.nextLine();
-      String accessKeyId = sc.nextLine();
-      String accessKeySecret = sc.nextLine();
-      bucketName = sc.nextLine();
-      sc.close();
 
-      // String endpoint = "oss-cn-shanghai.aliyuncs.com";
-      // String accessKeyId = "";
-      // String accessKeySecret = "";
-      // bucketName = "joy-sports";
+       String endpoint = "oss-cn-shanghai.aliyuncs.com";
+       String accessKeyId = "LTAI5t9A4M3j8pNFQ18aaWRo";
+       String accessKeySecret = "OPTi7VshJxtojfHqWvxQdzthG65V7T";
+       bucketName = "hkf123";
 
       ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
     }
-    catch(FileNotFoundException e){
+    catch(Exception e){
       System.err.println("找不到oss-key.txt");
     }
   }
