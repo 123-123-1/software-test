@@ -90,12 +90,16 @@
                 <b>测试时长：</b>{{ currentDetail.duration || '-' }}
             </div>
         </el-dialog>
+        <el-dialog v-model="showPie" title="测试统计" width="400px" @close="showPie = false" class="custom-pie-dialog">
+            <div ref="pieChartRef" style="width: 350px; height: 300px;"></div>
+        </el-dialog>
     </div>
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
-import { ElMessage } from 'element-plus'
+import { ref, computed, nextTick } from 'vue'
+import { ElMessage, ElDialog } from 'element-plus'
+import * as echarts from 'echarts'
 
 const testCases = ref([
     // GroupMemberServiceTest 的测试用例
@@ -330,6 +334,8 @@ const loading = ref(false)
 const status = ref('init') // init, running, done
 const dialogVisible = ref(false)
 const currentDetail = ref(null)
+const showPie = ref(false)
+const pieChartRef = ref(null)
 
 const statusText = computed(() => {
     if (status.value === 'init') return '未测试'
@@ -353,6 +359,34 @@ function formatActual(actual) {
         } catch { return actual }
     }
     return actual
+}
+
+function showPieDialog() {
+    showPie.value = true
+    nextTick(() => {
+        if (pieChartRef.value) {
+            const chart = echarts.init(pieChartRef.value)
+            const pass = testCases.value.filter(tc => tc.pass === true).length
+            const fail = testCases.value.filter(tc => tc.pass === false).length
+            chart.setOption({
+                title: { text: '测试通过情况', left: 'center' },
+                tooltip: { trigger: 'item' },
+                legend: { orient: 'vertical', left: 'left' },
+                series: [{
+                    name: '用例统计',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        { value: pass, name: '通过' },
+                        { value: fail, name: '失败' }
+                    ],
+                    emphasis: {
+                        itemStyle: { shadowBlur: 10, shadowOffsetX: 0, shadowColor: 'rgba(0, 0, 0, 0.5)' }
+                    }
+                }]
+            })
+        }
+    })
 }
 
 // 运行所有测试
@@ -406,6 +440,7 @@ async function runAllTests() {
         ElMessage.error('集成测试接口调用失败: ' + e)
         status.value = 'init'
     }
+    showPieDialog()
     loading.value = false
 }
 
@@ -517,5 +552,30 @@ function showDetail(row) {
 }
 .el-table .success-row {
     --el-table-tr-bg-color: var(--el-color-success-light-9);
+}
+.custom-pie-dialog .el-dialog__headerbtn {
+    top: 10px;
+    right: 10px;
+    width: 22px;
+    height: 22px;
+    background: none !important;
+    border-radius: 50%;
+    box-shadow: none;
+    padding: 0;
+}
+.custom-pie-dialog .el-dialog__close {
+    font-size: 16px;
+    color: #888;
+    background: none !important;
+    border-radius: 50%;
+    width: 22px;
+    height: 22px;
+    line-height: 22px;
+    text-align: center;
+    transition: background 0.2s;
+}
+.custom-pie-dialog .el-dialog__close:hover {
+    color: #409EFF;
+    background: none !important;
 }
 </style> 
